@@ -65,6 +65,11 @@ namespace Parabox.CSG
 
         internal CSG_Model(List<CSG_Polygon> list)
         {
+            FromPolygons(list);
+        }
+
+        internal void FromPolygons(List<CSG_Polygon> list)
+        {
             vertices = new List<CSG_Vertex>();
             Dictionary<Material, List<int>> submeshes = new Dictionary<Material, List<int>>();
 
@@ -134,6 +139,17 @@ namespace Parabox.CSG
             }
 
             return mesh;
+        }
+
+        public void Flip()
+        {
+            var polygons = ToPolygons();
+            foreach (var polygon in polygons)
+            {
+                polygon.Flip();
+            }
+
+            FromPolygons(polygons);
         }
     }
 }
