@@ -38,8 +38,19 @@ namespace Parabox.CSG
             CSG_Model csg_model_a = new CSG_Model(lhs);
             CSG_Model csg_model_b = new CSG_Model(rhs);
 
-            CSG_Node a = new CSG_Node(csg_model_a.ToPolygons());
-            CSG_Node b = new CSG_Node(csg_model_b.ToPolygons());
+            return Union(csg_model_a, csg_model_b);
+        }
+
+		/// <summary>
+        /// Returns a new mesh by merging @lhs with @rhs.
+        /// </summary>
+        /// <param name="lhs">The base mesh of the boolean operation.</param>
+        /// <param name="rhs">The input mesh of the boolean operation.</param>
+        /// <returns>A new mesh if the operation succeeds, or null if an error occurs.</returns>
+        public static CSG_Model Union(CSG_Model lhs, CSG_Model rhs)
+        {
+            CSG_Node a = new CSG_Node(lhs.ToPolygons());
+            CSG_Node b = new CSG_Node(rhs.ToPolygons());
 
             List<CSG_Polygon> polygons = CSG_Node.Union(a, b).AllPolygons();
 
@@ -57,8 +68,19 @@ namespace Parabox.CSG
             CSG_Model csg_model_a = new CSG_Model(lhs);
             CSG_Model csg_model_b = new CSG_Model(rhs);
 
-            CSG_Node a = new CSG_Node(csg_model_a.ToPolygons());
-            CSG_Node b = new CSG_Node(csg_model_b.ToPolygons());
+            return Subtract(csg_model_a, csg_model_b);
+        }
+
+        /// <summary>
+        /// Returns a new mesh by subtracting @lhs with @rhs.
+        /// </summary>
+        /// <param name="lhs">The base mesh of the boolean operation.</param>
+        /// <param name="rhs">The input mesh of the boolean operation.</param>
+        /// <returns>A new mesh if the operation succeeds, or null if an error occurs.</returns>
+        public static CSG_Model Subtract(CSG_Model lhs, CSG_Model rhs)
+        {
+            CSG_Node a = new CSG_Node(lhs.ToPolygons());
+            CSG_Node b = new CSG_Node(rhs.ToPolygons());
 
             List<CSG_Polygon> polygons = CSG_Node.Subtract(a, b).AllPolygons();
 
@@ -76,8 +98,19 @@ namespace Parabox.CSG
             CSG_Model csg_model_a = new CSG_Model(lhs);
             CSG_Model csg_model_b = new CSG_Model(rhs);
 
-            CSG_Node a = new CSG_Node(csg_model_a.ToPolygons());
-            CSG_Node b = new CSG_Node(csg_model_b.ToPolygons());
+            return Intersect(csg_model_a, csg_model_b);
+        }
+
+        /// <summary>
+        /// Returns a new mesh by intersecting @lhs with @rhs.
+        /// </summary>
+        /// <param name="lhs">The base mesh of the boolean operation.</param>
+        /// <param name="rhs">The input mesh of the boolean operation.</param>
+        /// <returns>A new mesh if the operation succeeds, or null if an error occurs.</returns>
+        public static CSG_Model Intersect(CSG_Model lhs, CSG_Model rhs)
+        {
+            CSG_Node a = new CSG_Node(lhs.ToPolygons());
+            CSG_Node b = new CSG_Node(rhs.ToPolygons());
 
             List<CSG_Polygon> polygons = CSG_Node.Intersect(a, b).AllPolygons();
 
